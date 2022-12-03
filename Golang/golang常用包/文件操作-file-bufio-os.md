@@ -1,3 +1,20 @@
+- [`Go`的文件操作](#go的文件操作)
+- [打开和关闭文件](#打开和关闭文件)
+- [读取文件](#读取文件)
+	- [`file.Read()`](#fileread)
+		- [基本使用](#基本使用)
+		- [循环读取](#循环读取)
+	- [`bufio`读取文件--一行一行](#bufio读取文件--一行一行)
+	- [`ioutil`读取整个文件](#ioutil读取整个文件)
+- [文件写入操作](#文件写入操作)
+	- [`Write`和`WriteString`--固定长度写](#write和writestring--固定长度写)
+	- [`bufio.NewWriter`--通过缓存](#bufionewwriter--通过缓存)
+	- [`ioutil.WriteFile`--一次性全写入](#ioutilwritefile--一次性全写入)
+- [练习](#练习)
+	- [`copyFile`](#copyfile)
+	- [实现一个`cat`命令](#实现一个cat命令)
+
+
 # `Go`的文件操作
 
 文件分为文本文件和二进制文件
@@ -172,14 +189,14 @@ func OpenFile(name string, flag int, perm FileMode) (*File, error) {
 
 `name`:为打开文件名,`flag`:打开文件模式
 
-| 模式            | 含义   |
-| ------------- | ---- |
-| `os.O_WRONLY` | 只写   |
+| 模式          | 含义     |
+| ------------- | -------- |
+| `os.O_WRONLY` | 只写     |
 | `os.O_CREATE` | 创建文件 |
-| `os.O_RDONLY` | 只读   |
-| `os.O_RDWR`   | 读写   |
-| `os.O_TRUNC`  | 清空   |
-| `os.O_APPEND` | 追加   |
+| `os.O_RDONLY` | 只读     |
+| `os.O_RDWR`   | 读写     |
+| `os.O_TRUNC`  | 清空     |
+| `os.O_APPEND` | 追加     |
 
 `perm`: 文件权限,一个八进制数, `r`(读) 04, `w`(写)02, `x`(执行) 01
 

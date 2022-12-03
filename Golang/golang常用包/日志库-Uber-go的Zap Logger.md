@@ -1,3 +1,21 @@
+- [背景介绍](#背景介绍)
+- [`Go Logger`优势和劣势](#go-logger优势和劣势)
+		- [优势:](#优势)
+		- [劣势:](#劣势)
+- [`Uber-go Zap`](#uber-go-zap)
+	- [为什么选择它](#为什么选择它)
+	- [安装](#安装)
+	- [配置`Zap Logger`](#配置zap-logger)
+		- [`Logger`](#logger)
+		- [`Sugared Logger`](#sugared-logger)
+- [定制`logger`](#定制logger)
+	- [将日志文件写入文件中](#将日志文件写入文件中)
+	- [更改时间编码并添加调用者详细信息](#更改时间编码并添加调用者详细信息)
+	- [使用`Lumberjack`进行日志切割归档](#使用lumberjack进行日志切割归档)
+		- [安装](#安装-1)
+	- [测试所有功能](#测试所有功能)
+
+
 转载: <https://www.liwenzhou.com/posts/Go/zap/>
 
 # 背景介绍
