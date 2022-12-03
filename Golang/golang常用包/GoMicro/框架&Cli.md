@@ -1,4 +1,26 @@
-[TOC]
+- [参考文档](#参考文档)
+- [架构学习](#架构学习)
+- [Go Micro组件架构](#go-micro组件架构)
+	- [Registry注册中心](#registry注册中心)
+	- [Selector负载均衡](#selector负载均衡)
+	- [Broker事件驱动：发布订阅](#broker事件驱动发布订阅)
+	- [Transport消息传输](#transport消息传输)
+- [通过Example的学习基本使用](#通过example的学习基本使用)
+	- [ 加入options](#-加入options)
+- [Go-micro cli使用](#go-micro-cli使用)
+	- [new 创建项目示例](#new-创建项目示例)
+		- [ Run a Client](#-run-a-client)
+	- [call 测试调用其中服务](#call-测试调用其中服务)
+	- [ run 运行服务](#-run-运行服务)
+	- [List services \&\& describe](#list-services--describe)
+- [一个调试Example](#一个调试example)
+- [graceful启动](#graceful启动)
+- [使用Plugins](#使用plugins)
+	- [使用logrus](#使用logrus)
+	- [启用http](#启用http)
+- [使用 event事件](#使用-event事件)
+- [使用`broker`](#使用broker)
+
 
 # 参考文档
 
@@ -531,3 +553,105 @@ func (a *demo) demo(c *gin.Context) {
 
 ```
 
+# 使用 event事件
+可以参考文档: https://github.com/go-micro/examples/tree/main/event
+```go
+package main
+
+import (
+	"context"
+
+	"go-micro.dev/v4"
+	proto "go-micro.dev/v4/api/proto"
+	"go-micro.dev/v4/util/log"
+)
+
+// All methods of Event will be executed when a message is received
+type Event struct{}
+
+// Method can be of any name
+func (e *Event) Process(ctx context.Context, event *proto.Event) error {
+	log.Logf("Received event %+v\n", event)
+	// do something with event
+	return nil
+}
+
+func main() {
+	service := micro.NewService(
+		micro.Name("user"),
+	)
+	service.Init()
+
+	// register subscriber
+	micro.RegisterSubscriber("go.micro.evt.user", service.Server(), new(Event))
+
+	if err := service.Run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+```
+# 使用`broker`
+参考`examples` : https://github.com/go-micro/examples/tree/main/broker
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+	"time"
+
+	_ "github.com/go-micro/plugins/v4/broker/nats"
+	"go-micro.dev/v4/broker"
+	"go-micro.dev/v4/util/cmd"
+)
+
+var (
+	topic = "go.micro.topic.foo"
+)
+
+func pub() {
+	tick := time.NewTicker(time.Second)
+	i := 0
+	for _ = range tick.C {
+		msg := &broker.Message{
+			Header: map[string]string{
+				"id": fmt.Sprintf("%d", i),
+			},
+			Body: []byte(fmt.Sprintf("%d: %s", i, time.Now().String())),
+		}
+		if err := broker.Publish(topic, msg); err != nil {
+			log.Printf("[pub] failed: %v", err)
+		} else {
+			fmt.Println("[pub] pubbed message:", string(msg.Body))
+		}
+		i++
+	}
+}
+
+func sub() {
+	_, err := broker.Subscribe(topic, func(p broker.Event) error {
+		fmt.Println("[sub] received message:", string(p.Message().Body), "header", p.Message().Header)
+		return nil
+	})
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
+func main() {
+	cmd.Init()
+
+	if err := broker.Init(); err != nil {
+		log.Fatalf("Broker Init error: %v", err)
+	}
+	if err := broker.Connect(); err != nil {
+		log.Fatalf("Broker Connect error: %v", err)
+	}
+
+	go pub()
+	go sub()
+
+	<-time.After(time.Second * 10)
+}
+```
