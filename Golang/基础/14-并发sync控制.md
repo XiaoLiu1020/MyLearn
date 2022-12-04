@@ -1,12 +1,17 @@
 **继续上一节**
+- [原子操作](#原子操作)
+	- [`atomic`包](#atomic包)
+			- [示例](#示例)
+
+
 ## `sync.WaitGroup`
 可以使用 `sync.WaitGroup` 实现并发任务的同步，有如下几种方法：
 
-方法名 | 功能
----|---
-`(wg *WaitGroup) Add(delta int)` | 计数器 + `delta`
-`(wg *WaitGroup) Done()` | 计数器-1
-`(wg *WaitGroup) Wait()` | 阻塞直到计数器为0
+| 方法名                           | 功能              |
+| -------------------------------- | ----------------- |
+| `(wg *WaitGroup) Add(delta int)` | 计数器 + `delta`  |
+| `(wg *WaitGroup) Done()`         | 计数器-1          |
+| `(wg *WaitGroup) Wait()`         | 阻塞直到计数器为0 |
 
 `sync.WaitGroup` 内部维护着计数器，启动任务将计数值添加N，完成一个就调用一个`Done()`，通过调用`Wait()`等待并发任务执行完
 
@@ -155,37 +160,37 @@ func main() {
 ## `atomic`包
 传入参数为 `&x` 内存地址
 
-方法 | 解释
----|---
-func LoadInt32(addr *int32) (val int32) |读取操作
-func LoadInt64(addr *int64) (val int64) |
-func LoadUint32(addr *uint32) (val uint32)|
-func LoadUint64(addr *uint64) (val uint64)|
-func LoadUintptr(addr *uintptr) (val uintptr)|
-func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer)	|
-func StoreInt32(addr *int32, val int32)|写入操作
-func StoreInt64(addr *int64, val int64)|
-func StoreUint32(addr *uint32, val uint32)|
-func StoreUint64(addr *uint64, val uint64)|
-func StoreUintptr(addr *uintptr, val uintptr)|
-func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer)	|
-func AddInt32(addr *int32, delta int32) (new int32)|修改操作
-func AddInt64(addr *int64, delta int64) (new int64)|
-func AddUint32(addr *uint32, delta uint32) (new uint32)|
-func AddUint64(addr *uint64, delta uint64) (new uint64)|
-func AddUintptr(addr *uintptr, delta uintptr) (new uintptr)	|
-func SwapInt32(addr *int32, new int32) (old int32)|交换操作
-func SwapInt64(addr *int64, new int64) (old int64)|
-func SwapUint32(addr *uint32, new uint32) (old uint32)|
-func SwapUint64(addr *uint64, new uint64) (old uint64)|
-func SwapUintptr(addr *uintptr, new uintptr) (old uintptr)|
-func SwapPointer(addr *unsafe.Pointer, new unsafe.Pointer) (old unsafe.Pointer)	|
-func CompareAndSwapInt32(addr *int32, old, new int32) (swapped bool)| 比较并交换操作
-func CompareAndSwapInt64(addr *int64, old, new int64) (swapped bool)|
-func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)|
-func CompareAndSwapUint64(addr *uint64, old, new uint64) (swapped bool)|
-func CompareAndSwapUintptr(addr *uintptr, old, new uintptr) (swapped bool)|
-func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool)|
+| 方法                                                                                     | 解释           |
+| ---------------------------------------------------------------------------------------- | -------------- |
+| func LoadInt32(addr *int32) (val int32)                                                  | 读取操作       |
+| func LoadInt64(addr *int64) (val int64)                                                  |
+| func LoadUint32(addr *uint32) (val uint32)                                               |
+| func LoadUint64(addr *uint64) (val uint64)                                               |
+| func LoadUintptr(addr *uintptr) (val uintptr)                                            |
+| func LoadPointer(addr *unsafe.Pointer) (val unsafe.Pointer)                              |
+| func StoreInt32(addr *int32, val int32)                                                  | 写入操作       |
+| func StoreInt64(addr *int64, val int64)                                                  |
+| func StoreUint32(addr *uint32, val uint32)                                               |
+| func StoreUint64(addr *uint64, val uint64)                                               |
+| func StoreUintptr(addr *uintptr, val uintptr)                                            |
+| func StorePointer(addr *unsafe.Pointer, val unsafe.Pointer)                              |
+| func AddInt32(addr *int32, delta int32) (new int32)                                      | 修改操作       |
+| func AddInt64(addr *int64, delta int64) (new int64)                                      |
+| func AddUint32(addr *uint32, delta uint32) (new uint32)                                  |
+| func AddUint64(addr *uint64, delta uint64) (new uint64)                                  |
+| func AddUintptr(addr *uintptr, delta uintptr) (new uintptr)                              |
+| func SwapInt32(addr *int32, new int32) (old int32)                                       | 交换操作       |
+| func SwapInt64(addr *int64, new int64) (old int64)                                       |
+| func SwapUint32(addr *uint32, new uint32) (old uint32)                                   |
+| func SwapUint64(addr *uint64, new uint64) (old uint64)                                   |
+| func SwapUintptr(addr *uintptr, new uintptr) (old uintptr)                               |
+| func SwapPointer(addr *unsafe.Pointer, new unsafe.Pointer) (old unsafe.Pointer)          |
+| func CompareAndSwapInt32(addr *int32, old, new int32) (swapped bool)                     | 比较并交换操作 |
+| func CompareAndSwapInt64(addr *int64, old, new int64) (swapped bool)                     |
+| func CompareAndSwapUint32(addr *uint32, old, new uint32) (swapped bool)                  |
+| func CompareAndSwapUint64(addr *uint64, old, new uint64) (swapped bool)                  |
+| func CompareAndSwapUintptr(addr *uintptr, old, new uintptr) (swapped bool)               |
+| func CompareAndSwapPointer(addr *unsafe.Pointer, old, new unsafe.Pointer) (swapped bool) |
 
 #### 示例
 比较一下 `sync.Mutex`互斥锁 和 原子操作性能 

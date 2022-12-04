@@ -1,3 +1,16 @@
+- [`gopsutil`](#gopsutil)
+	- [安装](#安装)
+- [使用](#使用)
+	- [CPU](#cpu)
+		- [采集CPU相关信息。](#采集cpu相关信息)
+		- [获取CPU负载信息：](#获取cpu负载信息)
+		- [`Memory`](#memory)
+		- [`Host`](#host)
+		- [`Disk`](#disk)
+		- [`net IO`](#net-io)
+		- [`net`](#net)
+
+
 # `gopsutil`
 
 `psutil`是一个跨平台进程和系统监控的`Python`库，而`gopsutil`是其`Go`语言版本的实现。本文介绍了它的基本使用。

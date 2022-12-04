@@ -1,3 +1,10 @@
+- [`Go json`包](#go-json包)
+- [构建`json`数据](#构建json数据)
+- [解析数据](#解析数据)
+  - [解析`json`数据到`struct`---(结构已知)](#解析json数据到struct---结构已知)
+  - [解析`json`到`interface`--(结构未知)](#解析json到interface--结构未知)
+  - [还可以解析，创建`json`流式数据](#还可以解析创建json流式数据)
+
 # `Go json`包
 ```golang
 func Marshal(v interface{}) ([]byte, error)

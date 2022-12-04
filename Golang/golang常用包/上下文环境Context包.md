@@ -1,3 +1,22 @@
+
+- [`Go`标准库`Context`](#go标准库context)
+- [为什么需要`Context`](#为什么需要context)
+	- [全局变量方式](#全局变量方式)
+	- [通道方式](#通道方式)
+	- [官方版方案 `context`](#官方版方案-context)
+- [`Context`](#context)
+	- [`Context`接口](#context接口)
+	- [`Background()和TODO()`](#background和todo)
+	- [`With`系列函数](#with系列函数)
+		- [`WithCancel`](#withcancel)
+		- [`WithDeadline`](#withdeadline)
+		- [`WithTimeout`](#withtimeout)
+		- [`WithValue`](#withvalue)
+		- [使用`Context`注意事项](#使用context注意事项)
+- [客户端超时取消示例](#客户端超时取消示例)
+	- [`server`端](#server端)
+	- [`client`](#client)
+
 # `Go`标准库`Context`
 在`Go http`包的`Server`中,每一个请求都有一个自己独立的对应的`goroutine`去处理; 当一个请求被取消或者超时时,所有用来处理该请求的`goroutine`都应该退出,然后系统才会释放这些`goroutine`占用资源
 
