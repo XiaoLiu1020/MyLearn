@@ -1,0 +1,82 @@
+- [Python笔记](#python笔记)
+- [文档目录如下:](#文档目录如下)
+
+# Python笔记
+由于大部分是有道云自己的文档格式,没有`markdown`,所有就直接分享出来链接吧
+
+https://note.youdao.com/s/CDQRIoQb
+
+# 文档目录如下:
+*   `Python`基础
+    *   函数和条件控制if
+    *   while循环和字符串操作
+    *   继承知识总结
+    *   类和类的继承
+    *   文件操作和复制
+    *   函数参数知识
+    *   模块和包
+    *   迭代器
+    *   生成器
+    *   with--上下文管理
+    *   property属性方法@
+    *   json序列化与pickle
+    *   反射
+    *   闭包与装饰器
+    *   yield-yield from
+    *   
+*   `Python`模块
+    *   argparse
+    *   getopt分割参数
+    *   prettytable表格输出
+    *   charder编码方式识别
+    *   hashlib
+    *   base64
+    *   datetime
+    *   queue模块
+    *   re
+    *   copy
+    *   logging
+    *   Python交互
+    *   shutil
+    *   os
+    *   Colorama
+*   `Django`基础
+    *   背景知识
+    *   安装
+    *   方法
+    *   请求方式
+    *   响应方式
+    *   类视图
+    *   模块
+    *   CSRF
+    *   jinja2模板
+    *   中间件middleware
+    *   ORM
+    *   admin后台管理
+    *   缓存
+*   `Django`项目
+    *   ...
+*   `Flask`基础
+    *   配置,路由,启动
+    *   路径参数,request对象,返回对象,cookies,session
+    *   flask_restful
+    *   url_for().md
+*   `Django`高级DFS
+*   `多任务编程`
+    *   一文读懂阻塞,非阻塞,同步非同步
+    *   select,epoll编程
+    *   IO编程-多进程多线程
+    *   协程异步IO
+    *   异步IO库asyncio
+*   `Flask`项目
+    *   ORM-Flask-SQLAlchemy
+    *   项目启动
+    *   对象存储--上传
+    *   Redis缓存
+    *   APScheduler定时任务
+    *   RPC--远程调用
+    *   即时通讯--WebSocket
+    *   SocketIO
+    *   elasticsearch应用检索
+    *   单元测试unittest
+    *   部署Gunicorn
