@@ -2,7 +2,7 @@
 - [文档目录如下:](#文档目录如下)
 
 # Python笔记
-由于大部分是有道云自己的文档格式,没有`markdown`,所有就直接分享出来链接吧
+由于大部分是有道云自己的文档格式,没有`markdown`,所以就直接分享出来链接吧
 
 https://note.youdao.com/s/CDQRIoQb
 
