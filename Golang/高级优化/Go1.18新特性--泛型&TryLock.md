@@ -18,9 +18,11 @@
       - [方法参数泛型](#方法参数泛型)
     - [泛型接口](#泛型接口)
       - [基本接口泛型](#基本接口泛型)
-- [sync包 `Mutex.TryLock`](#sync包-mutextrylock)
+      - [一般接口泛型](#一般接口泛型)
 - [提供模糊测试Fuzzing](#提供模糊测试fuzzing)
+  - [例子](#例子)
 - [Workspaces: 解决go mod 遗留下来的**本地多模块开发依赖问题**](#workspaces-解决go-mod-遗留下来的本地多模块开发依赖问题)
+  - [**重点**](#重点)
 
 
 # Go1.18变化
@@ -416,12 +418,207 @@ WriteOne[T int | string] (data T) T
 ReadOne[T int | string] () T
 }
 ```
+实现泛型接口
 
+```golang
+type Note struct{}
 
-# sync包 `Mutex.TryLock` 
-The new methods Mutex.TryLock, RWMutex.TryLock, and RWMutex.TryRLock, will acquire the lock if it is not currently held.
+func (n Note) WriteOne(one string) string {return "hello"}
+
+func (n Note) ReadOne() string {return "small"}
+
+```
+实例化泛型接口并调用
+
+值得注意的是泛型参数的值的类型，要和被实现方法的参数保持一致, 不然会报错
+```golang
+var one MyInterface[string] = Note{}
+fmt.Println(one.WriteOne("hello"))
+fmt.Println(one.ReadOne())
+```
+
+#### 一般接口泛型
+先定义一个一般泛型接口，就是接口里有约束类型：
+```golang
+type MyInterface2[T int | string] interface {
+ int|string //  这里多了类型
+ 
+  WriteOne(data T) T
+  ReadOne() T
+}
+```
+简而言之，一般泛型接口只能被当做类型参数来使用，无法被实例化
 
 # 提供模糊测试Fuzzing
+参考博客: [官方教程：Go fuzzing模糊测试](https://blog.csdn.net/perfumekristy/article/details/123163594?ops_request_misc=&request_id=&biz_id=102&utm_term=Golang%20%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95Fuzzying&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-123163594.142^v68^control,201^v4^add_ask,213^v2^t3_esquery_v2&spm=1018.2226.3001.4187)
+
+fuzzing的优点之一是可以基于开发者代码里指定的测试输入作为基础数据，进一步自动生成新的随机测试数据，用来发现指定测试输入没有覆盖到的边界情况。
+
+注意：你可以把单元测试、性能测试和模糊测试放在同一个*_test.go文件里。
+
+比如 模糊测试一个反转函数, 和单元测试一个反转函数
+```golang
+package main
+​
+import (
+    "testing"
+)
+​
+func TestReverse(t *testing.T) {
+    testcases := []struct {
+        in, want string
+    }{
+        {"Hello, world", "dlrow ,olleH"},
+        {" ", " "},
+        {"!12345", "54321!"},
+    }
+    for _, tc := range testcases {
+        rev := Reverse(tc.in)
+        if rev != tc.want {
+                t.Errorf("Reverse: %q, want %q", rev, tc.want)
+        }
+    }
+}
+
+func FuzzReverse(f *testing.F) {
+    testcases := []string{"Hello, world", " ", "!12345"}
+    for _, tc := range testcases {
+        f.Add(tc)  // Use f.Add to provide a seed corpus
+    }
+    f.Fuzz(func(t *testing.T, orig string) {
+        rev := Reverse(orig)
+        doubleRev := Reverse(rev)
+        if orig != doubleRev {
+            t.Errorf("Before: %q, after: %q", orig, doubleRev)
+        }
+        if utf8.ValidString(orig) && !utf8.ValidString(rev) {
+            t.Errorf("Reverse produced invalid UTF-8 string %q", rev)
+        }
+    })
+}
+```
+但是模糊测试是无法知道结果和预期是否相符的, 例如，对于测试用例`Reverse("Hello, world")`，单元测试预期的结果是 `"dlrow ,olleH"`。
+
+但是使用fuzzing时，我们没办法预期输出结果是什么，因为测试的输入除了我们代码里指定的用例之外，还有fuzzing随机生成的
+
+执行: `go test` 默认执行所有TestXxxx开头和FuzzXxx开头测试函数, 单独执行Fuzz 加`-fuzz=Fuzz`
+
+想要执行benchmark 加 `-benchmark`
+
+## 例子
+[Go1.18升级功能 - 模糊测试Fuzz](https://blog.csdn.net/zhiweihongyan1/article/details/125802604?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167063856316800192243291%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=167063856316800192243291&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-125802604-null-null.142^v68^control,201^v4^add_ask,213^v2^t3_esquery_v2&utm_term=Golang%20%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95Fuzzying&spm=1018.2226.3001.4187)
+
+```golang
+package main
+ 
+import (
+	"fmt"
+	"testing"
+)
+ 
+//func Fuzz1(f *testing.F) {
+//	f.Fuzz(func(t *testing.T, a string) {
+//		b, _ := strconv.ParseInt(a, 10, 64)
+//		fmt.Printf("%d\n", b)
+//	})
+//}
+ 
+func Fuzz2(f *testing.F) {
+	f.Fuzz(func(t *testing.T, a, b int) {
+		fmt.Println(a / b)
+	})
+
+```
+`go test -fuzztime 10s -fuzz .`
+
+输出报错得到日志,查看模糊测试的报错数据
+
+可以看到在测试方法，分母为0的时候异常了。
 
 # Workspaces: 解决go mod 遗留下来的**本地多模块开发依赖问题**
+
+参考文档: [Golang 1.18新特性工作区workspace](https://blog.csdn.net/qq_39280718/article/details/126786485?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-126786485-blog-126786517.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-17-126786485-blog-126786517.pc_relevant_aa&utm_relevant_index=2)
+
+-------------
+版权声明：本文为CSDN博主「PPPsych」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_39280718/article/details/126786485
+
+-------------
+
+为什么需要`workspace`呢? 
+
+比如: 我们有一个基础项目, 一个开发项目, 开发项目依赖基础项目, 如果我们频繁修改基础项目代码, 第二个 开发项目的版本就不是最新的了,就也要跟着不断更新, `workspace`就是为了解决这个问题, 让项目可以在本地依赖
+
+实现步骤
+创建一个工作区目录。例如：`myworkspace`
+
+使用vscode在当前工作区目录打开，`code .`
+
+创建一个文件夹`common`
+
+在该文件下面初始化项目，`go mod init common`
+
+在该文件夹中创建一个`common.go`文件，内容如下：
+```golang
+package common
+
+import "fmt"
+
+func Dosomething() {
+	fmt.Println("do something...")
+}
+```
+
+在`myworkspace`文件夹中再创建一个文件夹，`myproject_1`
+
+在`myproject_1`中初始化项目，`go mod init myproject_1`
+
+在该项目中创建一个`main.go`文件，内容如下：
+
+```golang
+package main
+
+import "common"
+
+func main() {
+	common.Dosomething()
+}
+// package common is not in GOROOT
+```
+这种情况下是不能导入包的，因为是两个项目里面，而不是同一个项目的两个模块。
+
+在`myworkspace`目录下执行如下命令：
+
+## **重点**
+
+`go work init .\common\`
+
+执行完该命令，会生成一个`go.work`文件，内容如下：
+```bash
+go 1.18
+
+use .\common\
+```
+再执行如下命令：
+
+`go work use .\myproject_1\`
+
+执行完该命令，go.work文件会更新，内容如下：
+
+```bash
+go 1.18
+
+use (
+	./myproject_1
+	.\common\
+)
+```
+
+现在我们再来执行main.go，就可以正常使用common项目下的函数了
+```bash
+[Running] go run "e:\golang开发学习\myworkspace\myproject_1\main.go"
+do something...
+
+[Done] exited with code=0 in 2.632 seconds
+```
 
