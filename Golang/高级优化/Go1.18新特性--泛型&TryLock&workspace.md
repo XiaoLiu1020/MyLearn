@@ -613,6 +613,21 @@ use (
 	.\common\
 )
 ```
+会得到大概如下目录:
+```bash
+cd myworkspace
+go work init ./common ./myproject_1
+tree
+myworkspace
+.
+├── common
+│   ├── go.mod      // 子模块
+│   └── main.go
+├── go.work         // 工作区
+└── myproject_1
+    ├── string_utils.go
+    └── go.mod      // 子模块
+```
 
 现在我们再来执行main.go，就可以正常使用common项目下的函数了
 ```bash
