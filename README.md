@@ -82,6 +82,7 @@
   - [高级优化](Golang/高级优化)
     - [Go1.18新特性--泛型&TryLock.md](Golang/%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96/Go1.18新特性--泛型&TryLock.md)
     - [30+张图讲解：Golang调度器GMP原理与调度全分析.md](Golang/高级优化/30+张图讲解：Golang调度器GMP原理与调度全分析.md)
+    - [sync.Map的选用&各种map.md](Golang/高级优化/sync.Map的选用&各种map.md)
     - [for-loop与json.Unmarshal性能分析概要.md](Golang/高级优化/for-loop与json.Unmarshal性能分析概要.md)
     - [for-range排坑指南.md](Golang/高级优化/for-range排坑指南.md)
     - [golang Channel用法总结.pdf](Golang/高级优化/Channel用法总结.pdf)
