@@ -11,7 +11,6 @@
 如有编写错误,或者某些文档引用没写清著作人的,请联系我更改或者删除,提出issues就行,十分抱歉
 
 
-
 # 目录
 - [Docker](Docker)
   - [Dockerfile使用.pdf](Docker/Dockerfile使用.pdf)
@@ -78,6 +77,7 @@
     - [Zap记录日志,分等级,日志切割.pdf](Golang/项目常用/Zap记录日志,分等级,日志切割.pdf)
     - [利用反射自定义Verify.pdf](Golang/项目常用/利用反射自定义Verify.pdf)
     - [提高邮件送达率.md](Golang/项目常用/提高邮件送达率.md)
+    - [casbin权限控制框架.md](Golang/项目常用/casbin权限控制框架.md)
     - [自己以前的socket项目.md](Golang/项目常用/自己以前的socket项目.md)
   - [高级优化](Golang/高级优化)
     - [Go1.18新特性--泛型&TryLock&workspace.md](Golang/%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96/Go1.18新特性--泛型&TryLock&workspace.md)
