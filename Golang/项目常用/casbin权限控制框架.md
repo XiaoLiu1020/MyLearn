@@ -1,3 +1,23 @@
+- [Golang访问权限控制框架`casbin`](#golang访问权限控制框架casbin)
+- [特点:](#特点)
+- [基本工作原理](#基本工作原理)
+- [开始使用](#开始使用)
+	- [创建`model.conf`](#创建modelconf)
+	- [创建`policy`文件-这里使用本地`policy.csv`](#创建policy文件-这里使用本地policycsv)
+	- [基本使用`main.go`](#基本使用maingo)
+	- [其他模型的教程文档\&例子模板](#其他模型的教程文档例子模板)
+- [高阶使用](#高阶使用)
+	- [超级管理员实现](#超级管理员实现)
+	- [`g = _, _` 的用法](#g--_-_-的用法)
+	- [多个 `g _, _`](#多个-g-_-_)
+	- [多层角色](#多层角色)
+	- [`domain`领域](#domain领域)
+	- [动态控制可读可写 -- 比如根据时间控制](#动态控制可读可写----比如根据时间控制)
+	- [动态初始化 `model.conf`(代码内实现model)](#动态初始化-modelconf代码内实现model)
+- [使用`gorm-adapter`--策略储存`policy`](#使用gorm-adapter--策略储存policy)
+	- [基本使用](#基本使用)
+- [自己项目中的运用`rbac.go`](#自己项目中的运用rbacgo)
+
 # Golang访问权限控制框架`casbin`
 官方文档: https://www.bookstack.cn/read/Casbin-zh/1.md
 
