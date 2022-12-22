@@ -107,6 +107,8 @@
       - [string原理解析.md](Golang/高级优化/原理解析/string原理解析.md)
       - [struct原理解析.md](Golang/高级优化/原理解析/struct原理解析.md)
       - [sync.RWMutex原理解析.md](Golang/高级优化/原理解析/sync.RWMutex原理解析.md)      
+- [项目设计与架构]
+  - [Mysql大表分库分表基因法.md](项目设计与架构/Mysql大表分库分表基因法.md)
 - [Kafka](Kafka)
   - [Kafka架构.md](Kafka/Kafka架构.md)
 - [Linux](Linux)
