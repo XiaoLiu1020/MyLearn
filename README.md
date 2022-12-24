@@ -1,5 +1,6 @@
 - [MyLearn](#mylearn)
 - [编写错误或者引用问题](#编写错误或者引用问题)
+- [ChangeLog](#ChangeLog)
 - [目录](#目录)
 
 # MyLearn
@@ -9,6 +10,12 @@
 # 编写错误或者引用问题
 
 如有编写错误,或者某些文档引用没写清著作人的,请联系我更改或者删除,提出issues就行,十分抱歉
+
+# ChangeLog
+- 2022-12-23
+  - [10万级QPS大流量,高并发优惠券系统.md](项目设计与架构/10万级QPS大流量,高并发优惠券系统.md)
+- 2022-12-22
+  - [Mysql大表分库分表基因法.md](项目设计与架构/Mysql大表分库分表基因法.md)
 
 
 # 目录
@@ -107,8 +114,9 @@
       - [string原理解析.md](Golang/高级优化/原理解析/string原理解析.md)
       - [struct原理解析.md](Golang/高级优化/原理解析/struct原理解析.md)
       - [sync.RWMutex原理解析.md](Golang/高级优化/原理解析/sync.RWMutex原理解析.md)      
-- [项目设计与架构]
+- [项目设计与架构](项目设计与架构)
   - [Mysql大表分库分表基因法.md](项目设计与架构/Mysql大表分库分表基因法.md)
+  - [10万级QPS大流量,高并发优惠券系统.md](项目设计与架构/10万级QPS大流量,高并发优惠券系统.md)
 - [Kafka](Kafka)
   - [Kafka架构.md](Kafka/Kafka架构.md)
 - [Linux](Linux)
