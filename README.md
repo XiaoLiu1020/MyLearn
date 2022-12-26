@@ -12,6 +12,8 @@
 如有编写错误,或者某些文档引用没写清著作人的,请联系我更改或者删除,提出issues就行,十分抱歉
 
 # ChangeLog
+- 2022-12-25
+  - [asynq结合redis的异步多线程任务框架.md](Golang/项目常用/asynq结合redis的异步多线程任务框架.md)
 - 2022-12-23
   - [10万级QPS大流量,高并发优惠券系统.md](项目设计与架构/10万级QPS大流量,高并发优惠券系统.md)
   - [sonic高性能json库.md](Golang/项目常用/sonic高性能json库.md)
@@ -89,6 +91,7 @@
     - [自己以前的socket项目.md](Golang/项目常用/自己以前的socket项目.md)
     - [轻量高效zerolog.md](Golang/项目常用/轻量高效zerolog.md)
     - [sonic高性能json库.md](Golang/项目常用/sonic高性能json库.md)
+    - [asynq结合redis的异步多线程任务框架.md](Golang/项目常用/asynq结合redis的异步多线程任务框架.md)
   - [高级优化](Golang/高级优化)
     - [Go1.18新特性--泛型&TryLock&workspace.md](Golang/%E9%AB%98%E7%BA%A7%E4%BC%98%E5%8C%96/Go1.18新特性--泛型&TryLock&workspace.md)
     - [30+张图讲解：Golang调度器GMP原理与调度全分析.md](Golang/高级优化/30+张图讲解：Golang调度器GMP原理与调度全分析.md)
