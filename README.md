@@ -1,6 +1,6 @@
 - [MyLearn](#mylearn)
 - [编写错误或者引用问题](#编写错误或者引用问题)
-- [ChangeLog](#ChangeLog)
+- [ChangeLog](#changelog)
 - [目录](#目录)
 
 # MyLearn
@@ -54,9 +54,9 @@
     - [日志库-Uber-go的ZapLogger.md](Golang/golang常用包/日志库-Uber-go的ZapLogger.md)
     - [标准库log.md](Golang/golang常用包/标准库log.md)
     - [excelize.md](Golang/golang%E5%B8%B8%E7%94%A8%E5%8C%85/excelize.md)
-    - [GoMicro](Golang/GoMicro)
-      - [README.md](Golang/GoMicro/README.md)
-      - [框架&Cli.md](Golang/GoMicro/框架&Cli.md)         
+    - [GoMicro](Golang/golang常用包/GoMicro)
+      - [README.md](Golang/golang常用包/GoMicro/README.md)
+      - [框架&Cli.md](Golang/golang常用包/GoMicro/框架&Cli.md)         
   - [基础](Golang/基础)
     - [01-Go基础.md](Golang/基础/01-Go基础.md)
     - [02-函数、变量.md](Golang/基础/02-函数、变量.md)
