@@ -12,6 +12,8 @@
 如有编写错误,或者某些文档引用没写清著作人的,请联系我更改或者删除,提出issues就行,十分抱歉
 
 # ChangeLog
+- 2023-01-08
+  - [表引擎](Clickhouse/表引擎.md)
 - 2023-01-06
   - [Clickhouse](Clickhouse)
 - 2022-12-25
@@ -208,3 +210,4 @@
 - [Clickhouse](Clickhouse)
   - [Clickhouse基础.md](Clickhouse/Clickhouse基础.md)
   - [安装使用ck(docker).md](Clickhouse/安装使用ck(docker).md)
+  - [表引擎.md](Clickhouse/表引擎.md)
