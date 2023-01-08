@@ -14,6 +14,7 @@
 # ChangeLog
 - 2023-01-08
   - [表引擎](Clickhouse/表引擎.md)
+  - [python动态加载模块并且调用.md](Python/python动态加载模块并且调用.md)
 - 2023-01-06
   - [Clickhouse](Clickhouse)
 - 2022-12-25
@@ -175,6 +176,7 @@
   - [使用Nginx转发Fastdfs及解决同步问题.pdf](Nginx/使用Nginx转发Fastdfs及解决同步问题.pdf)
 - [Python](Python)
   - [README.md](Python/README.md)
+  - [python动态加载模块并且调用.md](Python/python动态加载模块并且调用.md)
 - [Redis](Redis)
   - [Redis高级知识.pdf](Redis/Redis高级知识.pdf)
   - [Redis-让值过期.md](Redis/Redis-让值过期)
