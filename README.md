@@ -12,6 +12,8 @@
 如有编写错误,或者某些文档引用没写清著作人的,请联系我更改或者删除,提出issues就行,十分抱歉
 
 # ChangeLog
+- 2023-01-30
+  - [参数校验库Validator](Golang/项目常用/参数校验库Validator.md)
 - 2023-01-08
   - [表引擎](Clickhouse/表引擎.md)
   - [python动态加载模块并且调用.md](Python/python动态加载模块并且调用.md)
@@ -92,6 +94,7 @@
     - [Zap记录日志,分等级,日志切割.pdf](Golang/项目常用/Zap记录日志,分等级,日志切割.pdf)
     - [利用反射自定义Verify.pdf](Golang/项目常用/利用反射自定义Verify.pdf)
     - [提高邮件送达率.md](Golang/项目常用/提高邮件送达率.md)
+    - [参数校验库Validator](Golang/项目常用/参数校验库Validator.md)
     - [casbin权限控制框架.md](Golang/项目常用/casbin权限控制框架.md)
     - [自己以前的socket项目.md](Golang/项目常用/自己以前的socket项目.md)
     - [轻量高效zerolog.md](Golang/项目常用/轻量高效zerolog.md)
